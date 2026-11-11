@@ -1,8 +1,8 @@
-import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { type AddOptions, addSolution } from './lc-add.ts'
+import { type AddOptions, addSolution, metaFileFetcher } from './lc-add.ts'
 import type { FetchedProblem } from './lc-fetch.ts'
 
 const P232: FetchedProblem = {
@@ -119,5 +119,16 @@ describe('addSolution', () => {
     ).rejects.toThrow(/dateSolved/)
     expect(readFileSync(path.join(dir(), 'meta.json'), 'utf8')).toBe(before)
     expect(readdirSync(dir()).sort()).toEqual(['meta.json', 'two-stacks.py'])
+  })
+
+  it('can reuse saved lc:fetch output instead of fetching', async () => {
+    const file = path.join(dataDir, 'p232.json')
+    writeFileSync(file, JSON.stringify(P232))
+    const r = await addSolution(opts(), dataDir, metaFileFetcher(file))
+    expect(r.newProblem).toBe(true)
+    expect(meta().companies).toEqual(P232.companies)
+    await expect(addSolution(opts({ ref: '20' }), dataDir, metaFileFetcher(file))).rejects.toThrow(
+      /is problem #232, not "20"/,
+    )
   })
 })

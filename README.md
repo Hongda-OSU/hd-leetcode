@@ -54,6 +54,8 @@ To preview the site with another data folder (for example, sample data for UI wo
 DATA_DIR=path/to/data pnpm dev
 ```
 
+In Claude Code, `/lc 232` does the whole flow: fetch the problem, take the pasted solution, save it and commit. It is built on two scripts you can also run directly.
+
 To fetch a problem's metadata (title, difficulty, topics, and the 5 companies that ask it most) from LeetCode:
 
 ```bash

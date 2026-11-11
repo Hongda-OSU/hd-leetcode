@@ -5,7 +5,11 @@
  * the approach and formatted the code.
  *
  *   pnpm lc:add 232 --code /path/to/solution.py --language python \
- *     --approach 两栈法 --slug two-stacks [--notes "..."] [--date 2026-11-10]
+ *     --approach 两栈法 --slug two-stacks [--notes "..."] [--date 2026-11-10] \
+ *     [--meta /path/to/lc-fetch-output.json]
+ *
+ * --meta reuses `pnpm lc:fetch` output for a new problem, so a problem
+ * the caller just previewed isn't fetched a second time.
  *
  * Prints a JSON summary. Does not commit.
  */
@@ -130,6 +134,16 @@ export async function addSolution(
   return { id: next.id, title: next.title, file, newProblem }
 }
 
+/** A fetcher that returns saved `lc:fetch` output, refusing a different problem. */
+export function metaFileFetcher(file: string): Fetcher {
+  return async (ref) => {
+    const meta = JSON.parse(readFileSync(file, 'utf8')) as FetchedProblem
+    const matches = /^\d+$/.test(ref) ? meta.id === Number(ref) : meta.slug === ref
+    if (!matches) throw new LeetCodeError(`${file} is problem #${meta.id}, not "${ref}"`)
+    return meta
+  }
+}
+
 if (import.meta.main) {
   const { values, positionals } = parseArgs({
     allowPositionals: true,
@@ -140,12 +154,13 @@ if (import.meta.main) {
       slug: { type: 'string' },
       notes: { type: 'string' },
       date: { type: 'string' },
+      meta: { type: 'string' },
     },
   })
   const [ref] = positionals
   if (!ref || !values.code || !values.language || !values.approach || !values.slug) {
     console.error(
-      'Usage: pnpm lc:add <number|slug> --code <file> --language <id> --approach <name> --slug <file-stem> [--notes <text>] [--date YYYY-MM-DD]',
+      'Usage: pnpm lc:add <number|slug> --code <file> --language <id> --approach <name> --slug <file-stem> [--notes <text>] [--date YYYY-MM-DD] [--meta <lc:fetch output>]',
     )
     process.exit(2)
   }
@@ -161,7 +176,7 @@ if (import.meta.main) {
         date: values.date,
       },
       process.env.DATA_DIR ?? 'data',
-      (r) => fetchProblem(r, credentialsFromEnv()),
+      values.meta ? metaFileFetcher(values.meta) : (r) => fetchProblem(r, credentialsFromEnv()),
     )
     console.log(JSON.stringify(result, null, 2))
   } catch (err) {

@@ -38,6 +38,7 @@ Static Svelte site showing every LeetCode problem HD has solved; read-only, all 
 - Build data URLs from `import.meta.env.BASE_URL` (see `src/lib/data.ts`).
 - Changing the data schema: update `src/lib/types.ts`, the validator in `scripts/build-index.ts` and its tests together. Ask first.
 - Ask before adding a dependency.
+- Add problems through the `/lc` skill (`.claude/skills/lc/SKILL.md`), never by hand-editing `data/`.
 - `.env` holds HD's LeetCode cookies: never print, log or commit their values. Keep LeetCode requests few and spaced; never bulk-fetch.
 
 ## Gotchas
