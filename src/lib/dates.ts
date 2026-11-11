@@ -1,6 +1,7 @@
 /**
  * Dates are `YYYY-MM-DD` strings in the solver's local calendar.
- * Arithmetic goes through UTC so DST shifts never skip or repeat a day.
+ * Arithmetic goes through UTC so DST shifts never skip or repeat a day
+ * (streaks count day by day).
  */
 
 const pad = (n: number) => String(n).padStart(2, '0')
@@ -23,9 +24,4 @@ export function addDays(iso: string, days: number): string {
   const date = toUTC(iso)
   date.setUTCDate(date.getUTCDate() + days)
   return fromUTC(date)
-}
-
-/** 0 = Sunday … 6 = Saturday. */
-export function dayOfWeek(iso: string): number {
-  return toUTC(iso).getUTCDay()
 }

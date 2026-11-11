@@ -9,7 +9,12 @@
     <a class="home" href="./">~/hd-leetcode</a>
     <span class="stats">
       连续 <span class="accent">{stats.streak}</span> 天 · 共 {stats.solutions} 份解法 · {stats.activeDays}
-      个活跃日
+      个活跃日 ·
+      {#if stats.today > 0}
+        <span class="accent">今天已刷 {stats.today} 份 ✓</span>
+      {:else}
+        今天还没刷
+      {/if}
     </span>
   </div>
   <a class="github" href="https://github.com/Hongda-OSU">GitHub ↗</a>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addDays, dayOfWeek, localToday } from './dates'
+import { addDays, localToday } from './dates'
 
 describe('dates', () => {
   it('formats the local date', () => {
@@ -11,10 +11,5 @@ describe('dates', () => {
     expect(addDays('2026-01-01', -1)).toBe('2025-12-31')
     expect(addDays('2028-02-28', 1)).toBe('2028-02-29')
     expect(addDays('2026-03-08', 1)).toBe('2026-03-09') // US DST start
-  })
-
-  it('gets the day of week', () => {
-    expect(dayOfWeek('2026-11-08')).toBe(0) // Sunday
-    expect(dayOfWeek('2026-11-10')).toBe(2) // Tuesday
   })
 })

@@ -6,7 +6,7 @@ export interface Solution {
   file: string
   language: string
   approach: string
-  /** `YYYY-MM-DD`; the heatmap counts by this date. */
+  /** `YYYY-MM-DD`; streaks and daily counts use this date. */
   dateSolved: string
   notes?: string
 }
