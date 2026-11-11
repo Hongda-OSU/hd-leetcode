@@ -184,10 +184,6 @@
     color: var(--faint);
   }
 
-  .search:focus-within {
-    border-color: var(--accent);
-  }
-
   .facets {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
