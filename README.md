@@ -34,6 +34,7 @@ A personal site that keeps every LeetCode problem I've solved, with my solutions
 git clone https://github.com/Hongda-OSU/hd-leetcode.git
 cd hd-leetcode
 pnpm install
+cp .env.example .env   # only needed for the LeetCode scripts
 ```
 
 ## Usage
@@ -53,4 +54,17 @@ To preview the site with another data folder (for example, sample data for UI wo
 DATA_DIR=path/to/data pnpm dev
 ```
 
+To fetch a problem's metadata (title, difficulty, topics, company tags) from LeetCode:
+
+```bash
+pnpm lc:fetch 232
+```
+
 Each problem is a folder under `data/problems/<id>/`: a `meta.json` plus one source file per solution. The build validates every `meta.json` and fails on bad data; the schema is in `src/lib/types.ts`.
+
+## Environment Variables
+
+| Variable             | Description                                                                      |
+| -------------------- | -------------------------------------------------------------------------------- |
+| `LEETCODE_SESSION`   | LeetCode login cookie (Premium, for company tags); expires about every two weeks |
+| `LEETCODE_CSRFTOKEN` | Optional LeetCode `csrftoken` cookie                                             |

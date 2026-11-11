@@ -23,6 +23,7 @@ Static Svelte site showing every LeetCode problem HD has solved; read-only, all 
 | Format check / fix  | `pnpm lint` / `pnpm format`                  |
 | Build               | `pnpm build`                                 |
 | Serve the build     | `pnpm preview` (at `/hd-leetcode/`)          |
+| Fetch problem meta  | `pnpm lc:fetch 232` (needs `.env`)           |
 
 ## Rules
 
@@ -36,6 +37,7 @@ Static Svelte site showing every LeetCode problem HD has solved; read-only, all 
 - Build data URLs from `import.meta.env.BASE_URL` (see `src/lib/data.ts`); the site will live under a sub-path on GitHub Pages.
 - Changing the data schema: update `src/lib/types.ts`, the validator in `scripts/build-index.ts` and its tests together. Ask first.
 - Ask before adding a dependency.
+- `.env` holds HD's LeetCode cookies: never print, log or commit their values. Keep LeetCode requests few and spaced; never bulk-fetch.
 
 ## Gotchas
 
