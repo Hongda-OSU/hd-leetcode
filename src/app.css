@@ -15,6 +15,23 @@ body {
   overflow: hidden;
 }
 
+/* App-like feel: no text selection, no image dragging. */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+img,
+svg {
+  -webkit-user-drag: none;
+}
+
 body {
   margin: 0;
   background: var(--bg);
