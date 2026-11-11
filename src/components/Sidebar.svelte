@@ -44,6 +44,14 @@
     const pick = pickRandom(filtered, problems, current)
     if (pick) onselect(pick.id)
   }
+
+  let list: HTMLDivElement
+
+  // Random picks and shared links can select a row that's out of view.
+  $effect(() => {
+    void selectedId
+    list.querySelector('[aria-current="true"]')?.scrollIntoView({ block: 'nearest' })
+  })
 </script>
 
 <aside>
@@ -72,7 +80,7 @@
     </div>
   </div>
 
-  <div class="list">
+  <div class="list" bind:this={list}>
     <div class="list-head">
       <span class="count">
         {filtered.length} 道题
