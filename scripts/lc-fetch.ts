@@ -35,9 +35,12 @@ interface QuestionNode {
 
 type CompanyStat = { name: string; timesEncountered?: number }
 
+/** Only the companies that ask a problem most are worth keeping. */
+export const TOP_COMPANIES = 5
+
 /**
  * `companyTagStats` is a JSON string of time buckets ("1", "2", "3"), each a
- * list of companies. Returns unique names, most encountered first.
+ * list of companies. Returns the TOP_COMPANIES names asked most often overall.
  */
 export function parseCompanies(stats: string | null): string[] {
   if (!stats) return []
@@ -46,7 +49,10 @@ export function parseCompanies(stats: string | null): string[] {
   for (const list of Object.values(buckets)) {
     for (const c of list) totals.set(c.name, (totals.get(c.name) ?? 0) + (c.timesEncountered ?? 0))
   }
-  return [...totals].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([name]) => name)
+  return [...totals]
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+    .slice(0, TOP_COMPANIES)
+    .map(([name]) => name)
 }
 
 export function toProblem(q: QuestionNode): FetchedProblem {

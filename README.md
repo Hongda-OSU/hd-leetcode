@@ -54,7 +54,7 @@ To preview the site with another data folder (for example, sample data for UI wo
 DATA_DIR=path/to/data pnpm dev
 ```
 
-To fetch a problem's metadata (title, difficulty, topics, company tags) from LeetCode:
+To fetch a problem's metadata (title, difficulty, topics, and the 5 companies that ask it most) from LeetCode:
 
 ```bash
 pnpm lc:fetch 232

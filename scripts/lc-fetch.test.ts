@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LeetCodeError, parseCompanies, toProblem } from './lc-fetch.ts'
+import { LeetCodeError, TOP_COMPANIES, parseCompanies, toProblem } from './lc-fetch.ts'
 
 // Shape copied from a real companyTagStats response (problem 232).
 const STATS = JSON.stringify({
@@ -18,6 +18,13 @@ const STATS = JSON.stringify({
 describe('parseCompanies', () => {
   it('merges buckets, most encountered first, ties by name', () => {
     expect(parseCompanies(STATS)).toEqual(['Amazon', 'Google', 'Bloomberg', 'Apple', 'Microsoft'])
+  })
+
+  it(`keeps only the top ${TOP_COMPANIES}`, () => {
+    const many = JSON.stringify({
+      '1': Array.from({ length: 9 }, (_, i) => ({ name: `C${i}`, timesEncountered: 9 - i })),
+    })
+    expect(parseCompanies(many)).toEqual(['C0', 'C1', 'C2', 'C3', 'C4'])
   })
 
   it('returns [] when there are no stats', () => {
