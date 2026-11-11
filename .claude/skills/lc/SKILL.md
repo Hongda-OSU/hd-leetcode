@@ -35,7 +35,7 @@ Decide these yourself; don't ask HD to confirm them.
 
 Formatting may not change behaviour. Keep HD's names, comments and logic.
 
-- Use a formatter when installed: `pnpm exec prettier --stdin-filepath x.ts` (JS/TS), `rustfmt`, `ruff format` or `black` (Python), `gofmt`, `clang-format` (C/C++), `google-java-format`.
+- Use a formatter when installed: `pnpm exec prettier --no-config --stdin-filepath x.ts` (JS/TS; `--no-config` so the site's no-semicolon style doesn't strip HD's semicolons), `rustfmt`, `ruff format` or `black` (Python), `gofmt`, `clang-format` (C/C++), `google-java-format`.
 - Otherwise tidy by hand: the language's usual indentation (4 spaces; 2 for JS/TS), no trailing spaces, no tabs, one trailing newline, no stray blank lines.
 - Leave LeetCode's class/function signature as given.
 
