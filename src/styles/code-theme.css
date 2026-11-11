@@ -1,0 +1,47 @@
+/* highlight.js theme matching the design's token colors. */
+.hljs {
+  color: #e4e8ec;
+}
+
+.hljs-keyword,
+.hljs-literal,
+.hljs-selector-tag {
+  color: #f08f73;
+}
+
+.hljs-title.function_,
+.hljs-built_in {
+  color: #e7c787;
+}
+
+.hljs-title,
+.hljs-title.class_,
+.hljs-type,
+.hljs-attr {
+  color: #7fc8e8;
+}
+
+.hljs-variable.language_,
+.hljs-meta {
+  color: #d9a7e8;
+}
+
+.hljs-number {
+  color: #e3b552;
+}
+
+.hljs-string,
+.hljs-char,
+.hljs-regexp {
+  color: #9fd59a;
+}
+
+.hljs-comment {
+  color: #7d8893;
+  font-style: italic;
+}
+
+.hljs-punctuation,
+.hljs-operator {
+  color: #a8b2bc;
+}

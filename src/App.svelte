@@ -1,6 +1,7 @@
 <script lang="ts">
   import Header from './components/Header.svelte'
   import Heatmap from './components/Heatmap.svelte'
+  import ProblemView from './components/ProblemView.svelte'
   import Sidebar from './components/Sidebar.svelte'
   import { loadIndex } from './lib/data'
   import { localToday } from './lib/dates'
@@ -11,6 +12,7 @@
   const indexPromise = loadIndex()
 
   let selectedId = $state<number>()
+  let selectedFile = $state<string>()
 </script>
 
 <div class="app">
@@ -18,6 +20,7 @@
     <p class="status">加载中…</p>
   {:then index}
     {@const stats = computeStats(index.problems, today)}
+    {@const current = index.problems.find((p) => p.id === selectedId) ?? index.problems[0]}
     <Header {stats} />
     <Heatmap
       cells={buildHeatmap(countByDay(index.problems), today)}
@@ -27,10 +30,19 @@
     <div class="workspace">
       <Sidebar
         problems={index.problems}
-        selectedId={selectedId ?? index.problems[0]?.id}
-        onselect={(id) => (selectedId = id)}
+        selectedId={current?.id}
+        onselect={(id) => {
+          selectedId = id
+          selectedFile = undefined
+        }}
       />
-      <main></main>
+      <main>
+        {#if current}
+          <ProblemView problem={current} file={selectedFile} onfile={(f) => (selectedFile = f)} />
+        {:else}
+          <p class="status">还没有题目，用 /lc 添加第一道。</p>
+        {/if}
+      </main>
     </div>
   {:catch err}
     <p class="status">数据加载失败：{err.message}</p>
