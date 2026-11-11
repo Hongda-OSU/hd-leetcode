@@ -40,6 +40,17 @@
     gap: 18px;
   }
 
+  @media (max-width: 767px) {
+    header {
+      padding: 10px 16px;
+      gap: 4px 12px;
+    }
+
+    .left {
+      gap: 4px 12px;
+    }
+  }
+
   .home {
     font-weight: 700;
     font-size: 15px;
@@ -58,5 +69,6 @@
 
   .accent {
     color: var(--accent);
+    white-space: nowrap;
   }
 </style>

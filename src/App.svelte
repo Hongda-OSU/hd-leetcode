@@ -18,6 +18,9 @@
     // replaceState: browsing problems shouldn't flood the back button.
     history.replaceState(null, '', formatHash(next) || location.pathname)
   }
+
+  // Phones show the list or one problem at a time; a link opens the problem.
+  let showDetail = $state(parseHash(location.hash).id !== undefined)
 </script>
 
 <svelte:window onhashchange={() => (route = parseHash(location.hash))} />
@@ -29,14 +32,22 @@
     {@const stats = computeStats(index.problems, today)}
     {@const current = index.problems.find((p) => p.id === route.id) ?? index.problems[0]}
     <Header {stats} />
-    <div class="workspace">
-      <Sidebar problems={index.problems} selectedId={current?.id} onselect={(id) => go({ id })} />
+    <div class="workspace" class:detail={showDetail}>
+      <Sidebar
+        problems={index.problems}
+        selectedId={current?.id}
+        onselect={(id) => {
+          go({ id })
+          showDetail = true
+        }}
+      />
       <main>
         {#if current}
           <ProblemView
             problem={current}
             file={route.file}
             onfile={(file) => go({ id: current.id, file })}
+            onback={() => (showDetail = false)}
           />
         {:else}
           <p class="status">还没有题目，用 /lc 添加第一道。</p>
@@ -69,6 +80,13 @@
     min-height: 0;
     display: flex;
     flex-direction: column;
+  }
+
+  @media (max-width: 767px) {
+    .workspace.detail > :global(aside),
+    .workspace:not(.detail) > main {
+      display: none;
+    }
   }
 
   .status {

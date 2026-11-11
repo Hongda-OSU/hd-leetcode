@@ -8,11 +8,14 @@
     problem,
     file,
     onfile,
+    onback,
   }: {
     problem: IndexProblem
     /** Selected solution file; falls back to the first one. */
     file: string | undefined
     onfile: (file: string) => void
+    /** Back to the list; the button only shows on phones. */
+    onback: () => void
   } = $props()
 
   const DIFF_COLOR = { Easy: 'var(--easy)', Medium: 'var(--medium)', Hard: 'var(--hard)' }
@@ -45,6 +48,7 @@
 </script>
 
 <div class="top">
+  <button type="button" class="back" onclick={onback}>← 列表</button>
   <div class="heading">
     <div>
       <div class="num">#{problem.id}</div>
@@ -113,6 +117,33 @@
     flex: none;
     padding: 18px 28px 14px;
     border-bottom: 1px solid var(--border);
+  }
+
+  .back {
+    display: none;
+    min-height: 32px;
+    margin: -6px 0 6px -4px;
+    padding: 0 4px;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 767px) {
+    .back {
+      display: block;
+    }
+
+    .top {
+      padding: 14px 16px 12px;
+    }
+
+    h1 {
+      font-size: 18px;
+    }
   }
 
   .heading {

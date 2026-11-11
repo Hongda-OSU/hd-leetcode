@@ -133,6 +133,14 @@
     background: var(--panel);
   }
 
+  @media (max-width: 767px) {
+    aside {
+      flex: 1 1 0;
+      min-width: 0;
+      border-right: none;
+    }
+  }
+
   .controls {
     flex: none;
     display: flex;
