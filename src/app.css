@@ -3,7 +3,16 @@
   --bg: #0d1014;
   --panel: #11151a;
   --text: #e4e8ec;
+  --muted: #9aa4ae;
+  --border: rgba(255, 255, 255, 0.08);
   --accent: #5ccfa6;
+}
+
+/* Single-page app: the page itself never scrolls; panels scroll inside. */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -12,4 +21,12 @@ body {
   color: var(--text);
   font-family: 'JetBrains Mono', 'PingFang SC', 'Noto Sans SC', monospace;
   font-size: 13px;
+}
+
+a {
+  color: var(--text);
+}
+
+a:hover {
+  color: var(--accent);
 }
