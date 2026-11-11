@@ -69,10 +69,3 @@ pnpm lc:add 232 --code solution.py --language python --approach "Two stacks" --s
 ```
 
 Each problem is a folder under `data/problems/<id>/`: a `meta.json` plus one source file per solution. The build validates every `meta.json` and fails on bad data; the schema is in `src/lib/types.ts`.
-
-## Environment Variables
-
-| Variable             | Description                                                                      |
-| -------------------- | -------------------------------------------------------------------------------- |
-| `LEETCODE_SESSION`   | LeetCode login cookie (Premium, for company tags); expires about every two weeks |
-| `LEETCODE_CSRFTOKEN` | Optional LeetCode `csrftoken` cookie                                             |
