@@ -124,6 +124,7 @@
 <style>
   aside {
     flex: 0 0 340px;
+    min-width: 0; /* else a long no-wrap title widens the sidebar */
     min-height: 0;
     display: flex;
     flex-direction: column;
@@ -134,7 +135,6 @@
   @media (max-width: 767px) {
     aside {
       flex: 1 1 0;
-      min-width: 0;
       border-right: none;
     }
   }
