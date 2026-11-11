@@ -207,6 +207,7 @@
     color: var(--muted);
     border: 1px solid var(--border-strong);
     border-radius: 6px;
+    outline: none;
     font: inherit;
     font-size: 12px;
   }
