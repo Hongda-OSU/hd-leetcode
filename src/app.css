@@ -1,0 +1,15 @@
+:root {
+  color-scheme: dark;
+  --bg: #0d1014;
+  --panel: #11151a;
+  --text: #e4e8ec;
+  --accent: #5ccfa6;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', 'PingFang SC', 'Noto Sans SC', monospace;
+  font-size: 13px;
+}
