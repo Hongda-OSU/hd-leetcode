@@ -44,7 +44,7 @@
 
   pre {
     margin: 0;
-    padding-right: 24px;
+    padding-right: 96px; /* long lines can scroll out from under the tool overlay */
     font: inherit;
   }
 </style>
