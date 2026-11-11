@@ -1,6 +1,7 @@
 <script lang="ts">
   import Header from './components/Header.svelte'
   import Heatmap from './components/Heatmap.svelte'
+  import Sidebar from './components/Sidebar.svelte'
   import { loadIndex } from './lib/data'
   import { localToday } from './lib/dates'
   import { buildHeatmap } from './lib/heatmap'
@@ -8,6 +9,8 @@
 
   const today = localToday()
   const indexPromise = loadIndex()
+
+  let selectedId = $state<number>()
 </script>
 
 <div class="app">
@@ -21,6 +24,14 @@
       today={stats.today}
       activeDays={stats.activeDays}
     />
+    <div class="workspace">
+      <Sidebar
+        problems={index.problems}
+        selectedId={selectedId ?? index.problems[0]?.id}
+        onselect={(id) => (selectedId = id)}
+      />
+      <main></main>
+    </div>
   {:catch err}
     <p class="status">数据加载失败：{err.message}</p>
   {/await}
@@ -33,6 +44,20 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+  }
+
+  .workspace {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+  }
+
+  main {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
   }
 
   .status {

@@ -4,8 +4,22 @@
   --panel: #11151a;
   --text: #e4e8ec;
   --muted: #9aa4ae;
+  --faint: #86909a;
   --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.1);
   --accent: #5ccfa6;
+  --easy: #6cc0e8;
+  --medium: #e3b552;
+  --hard: #ef7b70;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
 
 /* Single-page app: the page itself never scrolls; panels scroll inside. */
