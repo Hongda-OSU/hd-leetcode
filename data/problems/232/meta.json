@@ -1,0 +1,24 @@
+{
+  "id": 232,
+  "slug": "implement-queue-using-stacks",
+  "title": "Implement Queue using Stacks",
+  "difficulty": "Easy",
+  "topics": ["Stack", "Design", "Queue"],
+  "companies": [],
+  "url": "https://leetcode.com/problems/implement-queue-using-stacks/",
+  "solutions": [
+    {
+      "file": "two-stacks.py",
+      "language": "python",
+      "approach": "两栈法",
+      "dateSolved": "2026-11-10",
+      "notes": "push 只进 inbox；pop / peek 时 outbox 空了才整个倒过去，摊还 O(1)。"
+    },
+    {
+      "file": "two-stacks.java",
+      "language": "java",
+      "approach": "两栈法",
+      "dateSolved": "2026-11-10"
+    }
+  ]
+}
