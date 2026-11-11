@@ -8,6 +8,7 @@
     type Filters,
   } from '../lib/filter'
   import { languageList } from '../lib/languages'
+  import Dropdown from './Dropdown.svelte'
   import { pickRandom } from '../lib/random'
   import type { IndexProblem } from '../lib/types'
 
@@ -66,16 +67,13 @@
     </label>
 
     <div class="facets">
-      {#each facets as f (f.key)}
-        <label class="facet">
-          {f.label}
-          <select bind:value={filters[f.key]} class:active={filters[f.key] !== ''}>
-            <option value="">全部</option>
-            {#each facetOptions(problems, filters, f.key) as o (o.value)}
-              <option value={o.value}>{o.value} ({o.count})</option>
-            {/each}
-          </select>
-        </label>
+      {#each facets as f, i (f.key)}
+        <Dropdown
+          label={f.label}
+          bind:value={filters[f.key]}
+          options={facetOptions(problems, filters, f.key)}
+          align={i === facets.length - 1 ? 'end' : 'start'}
+        />
       {/each}
     </div>
   </div>
@@ -154,7 +152,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    min-height: 38px;
+    min-height: 36px;
     padding: 0 10px;
     background: var(--bg);
     border: 1px solid var(--border-strong);
@@ -188,33 +186,6 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
-  }
-
-  .facet {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    min-width: 0;
-    font-size: 10px;
-    color: var(--faint);
-  }
-
-  .facet select {
-    width: 100%;
-    min-height: 36px;
-    padding: 0 6px;
-    background: var(--bg);
-    color: var(--muted);
-    border: 1px solid var(--border-strong);
-    border-radius: 6px;
-    outline: none;
-    font: inherit;
-    font-size: 12px;
-  }
-
-  .facet select.active {
-    color: var(--text);
-    border-color: var(--accent);
   }
 
   .list {
