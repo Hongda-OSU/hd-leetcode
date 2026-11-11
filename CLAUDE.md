@@ -22,6 +22,7 @@ Static Svelte site showing every LeetCode problem HD has solved; read-only, all 
 | Types               | `pnpm check`                                 |
 | Format check / fix  | `pnpm lint` / `pnpm format`                  |
 | Build               | `pnpm build`                                 |
+| Serve the build     | `pnpm preview` (at `/hd-leetcode/`)          |
 
 ## Rules
 
@@ -38,6 +39,8 @@ Static Svelte site showing every LeetCode problem HD has solved; read-only, all 
 
 ## Gotchas
 
+- Base path: the dev server serves `/`; `build` and `vite preview` use `/hd-leetcode/` (`vite.config.ts`). Preview also runs with command `serve`, so the check needs `isPreview`.
+- Deploy: push to `main` → `.github/workflows/deploy.yml` (lint, check, test, build) → GitHub Pages at https://hongdalin.blog/hd-leetcode/.
 - `data/` is not in `public/`: `scripts/vite-plugin-data.ts` serves it in dev and emits `data/index.json` plus each `meta.json` and listed solution file on build. Stray files in `data/` never ship.
 - The selection lives in the URL hash (`#/<id>/<file>`), written with `replaceState` so browsing doesn't flood history.
 - Flex children with long no-wrap text need `min-width: 0`, or they push the layout wider (the sidebar did).

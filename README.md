@@ -17,6 +17,7 @@ A personal site that keeps every LeetCode problem I've solved, with my solutions
 - Frontend: Svelte 5, TypeScript, Vite
 - Syntax highlighting: highlight.js
 - Tests: Vitest
+- Hosting: GitHub Pages, deployed by GitHub Actions on every push to `main`
 
 ## Getting Started
 
@@ -41,6 +42,7 @@ pnpm test    # unit tests
 pnpm check   # type-check
 pnpm lint    # formatting check (pnpm format to fix)
 pnpm build   # production build into dist/
+pnpm preview # serve the build at /hd-leetcode/, as on GitHub Pages
 ```
 
 To preview the site with another data folder (for example, sample data for UI work), set `DATA_DIR`:
