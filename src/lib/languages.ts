@@ -14,6 +14,22 @@ const LABELS: Record<string, string> = {
   sql: 'SQL',
 }
 
+/** Source file extension per language id; also the list `lc:add` accepts. */
+export const EXTENSIONS: Record<string, string> = {
+  python: 'py',
+  java: 'java',
+  cpp: 'cpp',
+  c: 'c',
+  csharp: 'cs',
+  javascript: 'js',
+  typescript: 'ts',
+  go: 'go',
+  rust: 'rs',
+  kotlin: 'kt',
+  swift: 'swift',
+  sql: 'sql',
+}
+
 export function languageLabel(id: string): string {
   return LABELS[id] ?? id
 }

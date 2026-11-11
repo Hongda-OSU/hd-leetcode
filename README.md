@@ -60,6 +60,12 @@ To fetch a problem's metadata (title, difficulty, topics, and the 5 companies th
 pnpm lc:fetch 232
 ```
 
+To save a solution (fetches the problem's metadata the first time, reuses it after):
+
+```bash
+pnpm lc:add 232 --code solution.py --language python --approach "Two stacks" --slug two-stacks
+```
+
 Each problem is a folder under `data/problems/<id>/`: a `meta.json` plus one source file per solution. The build validates every `meta.json` and fails on bad data; the schema is in `src/lib/types.ts`.
 
 ## Environment Variables

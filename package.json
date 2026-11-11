@@ -12,7 +12,8 @@
     "test": "vitest run --passWithNoTests",
     "format": "prettier --write .",
     "lint": "prettier --check .",
-    "lc:fetch": "node scripts/lc-fetch.ts"
+    "lc:fetch": "node scripts/lc-fetch.ts",
+    "lc:add": "node scripts/lc-add.ts"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",

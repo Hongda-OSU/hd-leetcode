@@ -158,7 +158,7 @@ export async function fetchProblem(ref: string, creds: Credentials): Promise<Fet
   return toProblem(data.question)
 }
 
-function credentialsFromEnv(): Credentials {
+export function credentialsFromEnv(): Credentials {
   try {
     process.loadEnvFile('.env')
   } catch {
